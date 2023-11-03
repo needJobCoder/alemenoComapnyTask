@@ -4,7 +4,20 @@ import {TextInput, View, StyleSheet, Touchable, TouchableOpacity, Text} from 're
 import {GlobalContext} from '../App';
 
 function Login() {
-  const {email, setEmail, username, setUsername} = useContext(GlobalContext);
+  const {
+    courseDataModel,
+    setCourseDataModel,
+    getSocket,
+    email,
+    setEmail,
+    username,
+    setUsername,
+    checkIfSocketExists,
+    currentSelectedCourse,
+    setCurrentSelectedCourse,
+    isLoggedIn,
+    setIsLoggedIn
+  } = useContext(GlobalContext);
   return (
     <View style={styles.container}>
       <TextInput style={styles.input} placeholder="Name" onChangeText={(text)=>{setUsername(text)}} />
@@ -17,7 +30,7 @@ function Login() {
           width:'40%',
           textAlign:'center',
           alignItems:'center'
-        }}>
+        }} onPress={()=> {setIsLoggedIn(true)}}>
         <Text style={{color:'white'}}>Submit</Text>
       </TouchableOpacity>
     </View>

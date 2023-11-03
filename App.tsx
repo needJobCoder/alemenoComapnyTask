@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import io, {Socket} from 'socket.io-client';
 import Login from './components/Login';
 import Courses from './components/Courses';
+import CourseRoutes from './routes/CourseRoutes';
 
 export const GlobalContext = createContext();
 
@@ -13,8 +14,8 @@ const socket = io('http://10.0.2.2:3000');
 
 const Tab = createBottomTabNavigator();
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [username, setUsername] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('Carl Johnson');
   const [email, setEmail] = useState('');
   const [courseDataModel, setCourseDataModel] = useState();
   const [getSocket, setSocket] = useState<Socket>();
@@ -65,7 +66,9 @@ function App() {
         setUsername,
         checkIfSocketExists,
         currentSelectedCourse,
-        setCurrentSelectedCourse
+        setCurrentSelectedCourse,
+        isLoggedIn,
+        setIsLoggedIn
       }}>
       <NavigationContainer>
         <Tab.Navigator>
@@ -73,7 +76,7 @@ function App() {
           {isLoggedIn ? (
             <>
               <Tab.Screen component={Dashboard} name="Dashboard" />
-              <Tab.Screen component={Courses} name="Courses" />
+              <Tab.Screen component={CourseRoutes} name="Courses" />
             </>
           ) : null}
         </Tab.Navigator>

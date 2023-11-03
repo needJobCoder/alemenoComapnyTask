@@ -10,9 +10,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {useNavigation} from '@react-navigation/native';
+
 import {GlobalContext} from '../App';
 
 const CourseItem = ({name, instructor, item}) => {
+  const navigation = useNavigation();
   const {
     courseDataModel,
     setCourseDataModel,
@@ -31,6 +34,7 @@ const CourseItem = ({name, instructor, item}) => {
         <TouchableOpacity
           onPress={() => {
             setCurrentSelectedCourse(item);
+            navigation.navigate('Course');
           }}>
           <Text style={styles.nameText}>{name}</Text>
         </TouchableOpacity>
@@ -87,7 +91,7 @@ function Courses() {
 
   useEffect(() => {
     checkIfSocketExists();
-  }, [checkIfSocketExists, getSocket]);
+  }, []);
   return (
     <View>
       <View style={{alignItems: 'center'}}>
